@@ -15,7 +15,7 @@ namespace ItemStats.StatModification
             (itemCount, itemIndex, itemStatIndex, context) =>
             {
                 return ContextProvider.GetPlayerBodiesExcept(0)
-                    .Sum(body => body.CountItems(ItemIndex.TreasureCache)) + itemCount;
+                    .Sum(body => body.CountItems(ItemCatalog.FindItemIndex("TreasureCache"))) + itemCount;
             };
 
         protected override Func<float, ItemIndex, int, StatContext, string> FormatFunc { get; } =
@@ -23,6 +23,6 @@ namespace ItemStats.StatModification
                 $"{result.FormatInt(signed: true, color: Colors.ModifierColor)} from other players";
 
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
-            new Dictionary<ItemIndex, IEnumerable<int>> {[ItemIndex.TreasureCache] = new[] {0, 1, 2}};
+            new Dictionary<ItemIndex, IEnumerable<int>> {[ItemCatalog.FindItemIndex("TreasureCache")] = new[] {0, 1, 2}};
     }
 }

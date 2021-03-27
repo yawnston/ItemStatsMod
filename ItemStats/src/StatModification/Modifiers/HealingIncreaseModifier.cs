@@ -9,13 +9,13 @@ namespace ItemStats.StatModification
     {
         protected override Func<float, ItemIndex, int, StatContext, float> ModifyValueFunc =>
             (result, itemIndex, itemStatIndex, context) =>
-                result * (1 + context.CountItems(ItemIndex.IncreaseHealing));
+                result * (1 + context.CountItems(ItemCatalog.FindItemIndex("IncreaseHealing")));
 
         protected override Func<float, ItemIndex, int, StatContext, string> FormatFunc =>
             (result, itemIndex, itemStatIndex, ctx) =>
             {
                 string formattedResult;
-                if (itemIndex == ItemIndex.Mushroom || itemIndex == ItemIndex.Tooth)
+                if (itemIndex == ItemCatalog.FindItemIndex("Mushroom") || itemIndex == ItemCatalog.FindItemIndex("Tooth"))
                 {
                     formattedResult = result.FormatPercentage(signed: true, color: Colors.ModifierColor);
                 }
@@ -30,14 +30,14 @@ namespace ItemStats.StatModification
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
             new Dictionary<ItemIndex, IEnumerable<int>>
             {
-                [ItemIndex.Mushroom] = new[] {0},
-                [ItemIndex.HealWhileSafe] = new[] {0},
-                [ItemIndex.RegenOnKill] = new[] {0},
-                [ItemIndex.Medkit] = new[] {0},
-                [ItemIndex.Tooth] = new[] {0},
-                [ItemIndex.HealOnCrit] = new[] {0},
-                [ItemIndex.Seed] = new[] {0},
-                [ItemIndex.Knurl] = new[] {1}
+                [ItemCatalog.FindItemIndex("Mushroom")] = new[] {0},
+                [ItemCatalog.FindItemIndex("HealWhileSafe")] = new[] {0},
+                [ItemCatalog.FindItemIndex("RegenOnKill")] = new[] {0},
+                [ItemCatalog.FindItemIndex("Medkit")] = new[] {0},
+                [ItemCatalog.FindItemIndex("Tooth")] = new[] {0},
+                [ItemCatalog.FindItemIndex("HealOnCrit")] = new[] {0},
+                [ItemCatalog.FindItemIndex("Seed")] = new[] {0},
+                [ItemCatalog.FindItemIndex("Knurl")] = new[] {1}
             };
     }
 }

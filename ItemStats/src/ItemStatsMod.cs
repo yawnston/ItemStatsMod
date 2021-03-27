@@ -26,8 +26,13 @@ namespace ItemStats
         {
             InitConfig();
 
-            ItemStatProvider.Init();
-            StatModifiers.Init();
+            // We need to make sure to only call our Init functions after items are loaded in the ItemCatalog
+            ItemCatalog.availability.CallWhenAvailable(() =>
+            {
+                ItemStatProvider.Init();
+                StatModifiers.Init();
+            });
+
             Hooks.Init();
         }
 
